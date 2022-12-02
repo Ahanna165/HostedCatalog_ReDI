@@ -1,4 +1,6 @@
 import pandas as pd
+import os
+
 
 class OutputFile(pd.DataFrame):
     """Initialize a standard file or use fromtemplate method to upload a template"""
@@ -7,12 +9,21 @@ class OutputFile(pd.DataFrame):
         pd.DataFrame.__init__(self, *args, **kwargs)
         print('Instance of OutputFile is created...')
 
-    @classmethod
-    def fromtemplate(cls, path=input('Paste here the PATH of your template file as EXCEL: ')):
-        return pd.read_excel(path)
+    def __call__(self, path=input('Paste here the PATH of your template file as EXCEL\nor hit enter to use default: ')):
+        # Split the extension from the path and normalise it to lowercase.
+        self.path.strip('"')
+        ext = os.path.splitext(self.path)[-1].lower()
+        # Now we can simply use == to check for equality, no need for wildcards.
+        if ext == ".xlsx":
+            print(self.path, "is an {}}".format(ext))
+        elif ext == ".xls":
+            print(self.path, "is an {}}".format(ext))
+        else:
+            print(self.path, "is an unknown file format.")
+        return pd.read_excel(self.path)
 
     def new_column(self):
-        self[str(input('Nname new column: '))] = self.apply(lambda _: '', axis=1)
+        self[str(input('Name new column: '))] = self.apply(lambda _: '', axis=1)
         return self
 
     def mime_lrg(self):
@@ -22,3 +33,5 @@ class OutputFile(pd.DataFrame):
         return self.join(other, how='left', lsuffix='o_')
 
 
+if __name__ == '__main__':
+    newcat = OutputFile()

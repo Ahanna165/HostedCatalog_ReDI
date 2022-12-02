@@ -17,7 +17,7 @@ inputfile = inputdata.InputFile.sup(inputfile)
 inputfile = inputdata.InputFile.set_columns(inputfile)
 inputdata.InputFile.get_summary(inputfile)
 
-newcat = OutputFile()
+newcat = OutputFile.fromtemplate()
 newcat = newcat.cat_join(inputfile)
 
 newcat = outputdata.OutputFile.new_column(newcat) #not working
