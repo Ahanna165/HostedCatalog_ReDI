@@ -4,10 +4,10 @@ from hostedcatalog import directory, inputdata, outputdata
 from hostedcatalog.directory import Directory
 from hostedcatalog.outputdata import *
 
-new_folder = directory.Directory()
-directory.Directory.set_directory(new_folder)
+#new_folder = directory.Directory()
+#directory.Directory.set_directory(new_folder)
 
-inputfile = inputdata.InputFile(pd.read_excel(str(input('Paste here the PATH of your source file as EXCEL: '))))
+inputfile = inputdata.InputFile()
 inputfile = inputfile.impute_na()
 inputfile = inputfile[inputfile['VOLUMEPRICE'] != 0]
 inputfile = inputfile[inputfile['QTYAMOUNT'] == 1]
@@ -17,7 +17,7 @@ inputfile = inputdata.InputFile.sup(inputfile)
 inputfile = inputdata.InputFile.set_columns(inputfile)
 inputdata.InputFile.get_summary(inputfile)
 
-newcat = OutputFile.fromtemplate()
+newcat = OutputFile.from_file()
 newcat = newcat.cat_join(inputfile)
 
 newcat = outputdata.OutputFile.new_column(newcat) #not working

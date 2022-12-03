@@ -5,9 +5,28 @@ import xlrd
 class InputFile(pd.DataFrame):
     """instance, data ingestion, data inspection and data cleaning of output file"""
 
+    @staticmethod
+    def from_data():
+        data = str(input('Paste here the PATH of your input file as EXCEL: '))
+        while True:
+            if '.xlsx' not in data:
+                print(data, 'is not a valid path')
+            elif '.xls' not in data:
+                print(data, 'is not a valid path')
+            else:
+                InputFile(data)
+
     def __init__(self, data, *args, **kwargs):  # data will ingest excel file
         pd.DataFrame.__init__(self, data, *args, **kwargs)
         print('Instance created: Rows, Columns', self.shape)
+
+    def __call__(self, data): # instance = method to save a file under itself
+        self.data = data.replace('"', '')
+        pd.read_excel(self.data)
+        print('Hosted catalog file {} saved under {}'.format(self.filename, self.dir_path))
+
+    def __repr__(self):
+        return self.shape
 
     def get_summary(self): # inspect data for NA esp. unspsccode and coo
         print(self.isna().sum())
@@ -34,3 +53,6 @@ class InputFile(pd.DataFrame):
             to_replace=['</sup>/', '</sup>', '<sup>&reg;', '<sup>', '<sup style="font-size:6pt;', '">'], value=' ',
             regex=True)
         return self
+
+if __name__ == "__main__":
+    InputFile.from_data()

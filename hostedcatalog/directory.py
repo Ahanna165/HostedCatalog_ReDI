@@ -41,3 +41,7 @@ class Directory:
                       index=False,
                       engine='xlsxwriter')
         print('Hosted catalog file {} saved under {}'.format(self.filename, self.dir_path))
+
+if __name__ == '__main__':
+    new_folder = Directory()
+    Directory.set_directory(new_folder)
