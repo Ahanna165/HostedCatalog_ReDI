@@ -45,3 +45,4 @@ class Directory:
 if __name__ == '__main__':
     new_folder = Directory()
     Directory.set_directory(new_folder)
+    new_folder(file)

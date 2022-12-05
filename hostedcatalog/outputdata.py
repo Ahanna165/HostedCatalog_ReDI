@@ -4,9 +4,9 @@ import xlsxwriter
 
 class OutputFile(pd.DataFrame):
     """Initialize a standard file or use fromtemplate method to upload a template"""
-    @classmethod
-    def fromtemplate(cls):
-        data = str(input('Paste here the TEMPLATE PATH of your \nOUTPUT file as EXCEL: ')).replace('"', '')
+    @staticmethod
+    def fromtemplate():
+        data = str(input('Paste again TEMPLATE PATH of your \nOUTPUT file as EXCEL: ')).replace('"', '')
         while True:
             if data.endswith('xlsx'):
                 template = pd.read_excel(data, engine='openpyxl')
@@ -31,8 +31,7 @@ class OutputFile(pd.DataFrame):
     def mime_lrg(self):
         return self['PRODUCTIMAGE'].replace(to_replace=['small', 'sm'], value=['large', 'lrg'], regex=True)
 
-    def cat_join(self, other):
-        return self.join(other, how='left', lsuffix='o_')
 
 if __name__ == '__main__':
-    newcat = OutputFile.fromtemplate()
+    OutputFile.fromtemplate()
+    OutputFile(template=inputfile)

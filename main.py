@@ -8,7 +8,7 @@ Directory.set_directory(new_folder)
 
 # import your data from .xlsx or .xls file
 from hostedcatalog import inputdata
-
+# use test_input.xls for testing
 while True:
     data = str(input('Paste the PATH of your \nINPUT file as EXCEL: ')).replace('"', '')
     if data.endswith('xlsx'):
@@ -46,15 +46,32 @@ inputdata.InputFile.get_summary(inputfile)
 # check your template extension
 
 from hostedcatalog.checkfile import check_ext
-data = str(input('Paste the PATH of your \nOUTPUT TEMPLATE file as EXCEL: ')).replace('"', '')
-check_ext(data)
+#data = str(input('Paste the PATH of your \nOUTPUT TEMPLATE file as EXCEL: ')).replace('"', '')
+#check_ext(data)
 
 # upload template file or hit enter to use default structure
-from hostedcatalog import outputdata
-#newcat = OutputFile.from_file()
-#newcat = newcat.cat_join(inputfile)
+
+from hostedcatalog.outputdata import OutputFile
+
+# use template.xlsx file for testing
+data = str(input('Paste again TEMPLATE PATH of your \nOUTPUT file as EXCEL: ')).replace('"', '')
+if check_ext(data) == True:
+    outputfile = OutputFile.fromtemplate()
+else:
+    outputfile = inputfile
+    print('Output File == Input File')
+
+print(outputfile.head())
+
+# here further work with template structure or default structure
+if check_ext(data) == False:
+    newcat = outputfile
+else:
+    newcat = inputfile.join(outputfile, how='left', lsuffix='o_')
+    print(newcat.head())
 
 #newcat = outputdata.OutputFile.new_column(newcat) #not working
 #newcat['MIME_LRG'] = outputdata.OutputFile.mime_lrg(newcat) # not working
 
-#new_folder(inputfile)
+# save new catalog to newly created directory
+new_folder(newcat)
