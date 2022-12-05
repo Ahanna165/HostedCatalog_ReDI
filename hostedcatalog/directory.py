@@ -18,7 +18,7 @@ class Directory:
     def set_directory(self):  # sets new directory with file name, checkes if there is directory
         print('Your current working directory is: ', os.getcwd())
         while True:
-            parent_dir = str(input('Insert your new catalog folder destination path: '))
+            parent_dir = str(input('Insert your new catalog folder destination path\nor hit enter to stay in current directory: '))
             self.dir_path = os.path.join(parent_dir, self.filename)
             isExist = os.path.exists(self.dir_path)
             if not isExist:
