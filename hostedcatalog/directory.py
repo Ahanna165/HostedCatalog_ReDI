@@ -10,7 +10,7 @@ class Directory:
     and creates a folder for new catalog version"""
 
     def __init__(self):  # creates instance and name(name+month+year)
-        self.filename = "{fileprefix}_{month} {year}".format(fileprefix=str(input('Insert catalog file prefix: ')),
+        self.filename = "{fileprefix}_{month} {year}".format(fileprefix=str(input('Insert new catalog file prefix: ')),
                                                              year=datetime.now().strftime("%Y"),
                                                              month=str.upper(datetime.now().strftime("%b")))
         print('Instance directory created', self.filename)

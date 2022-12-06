@@ -8,3 +8,5 @@ def check_ext(data):
     else:
         print('WARNING: INCORRECT extension. Continue...')
         return False
+
+

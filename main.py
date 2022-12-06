@@ -1,5 +1,6 @@
 import pandas as pd
 from hostedcatalog.directory import Directory
+from test_checkfile import test_check_bad_ext, test_check_2good_ext, test_check_1good_ext
 
 # create new folder for new catalog version or use current directory
 new_folder = Directory()
@@ -67,13 +68,24 @@ if check_ext(data) == False:
     newcat = outputfile
 else:
     newcat = inputfile.join(outputfile, how='left', lsuffix='o_')
-    for column in newcat:
-        if column not in inputfile.columns:
-            print('\nFor column: ', column, '\nChoose from:\n', inputfile.columns)
+    for ncolumn in newcat:
+        if ncolumn not in inputfile.columns:
+            print('\nFor column: ', ncolumn, '\nChoose from:\n', inputfile.columns)
             try:
-                newcat[column] = newcat[str(input('Data from column: ')).upper()]
+                newcat[ncolumn] = newcat[str(input('Data from column: ')).upper()]
             except KeyError:
                 print('KeyError! Enter valid column name not case sensitive')
+                for ocolumn in inputfile.columns:
+                    print('For ', ncolumn, ' insert data from: ', ocolumn, '?')
+                    if str(input('y/n:')).lower != 'y':
+                        continue
+                    else:
+                        newcat[ncolumn] = inputfile[ocolumn]
+
+
+
+
+
 
     for column in newcat:
         if column in inputfile.columns:
@@ -82,7 +94,7 @@ else:
     print(newcat.head())
 
 newcat[str(input('Insert name of new column: '))] = newcat.apply(lambda _: '', axis=1)  # create new empty column
-newcat['MIME_LRG'] = outputdata.OutputFile.mime_lrg(newcat)  # create mime column and insert clean data
+#newcat['MIME_LRG'] = outputdata.OutputFile.mime_lrg(newcat)  # create mime column and insert clean data
 
 # save new catalog to newly created directory
 new_folder(newcat)
