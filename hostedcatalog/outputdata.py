@@ -24,9 +24,6 @@ class OutputFile(pd.DataFrame):
         pd.DataFrame.__init__(self, template, *args, **kwargs)
         print('Instance of OutputFile is created...')
 
-    def new_column(self):
-        self[str(input('Name new column: '))] = self.apply(lambda _: '', axis=1)
-        return self
 
     def mime_lrg(self):
         return self['PRODUCTIMAGE'].replace(to_replace=['small', 'sm'], value=['large', 'lrg'], regex=True)
