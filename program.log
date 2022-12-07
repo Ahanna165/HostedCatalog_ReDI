@@ -1,0 +1,33 @@
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:asyncio:Using proactor: IocpProactor
+07.12.2022 [DEBUG         11] Check the workflow
+07.12.2022 [INFO          12] This is information
+07.12.2022 [WARNING       13] This is warning
+07.12.2022 [ERROR         14] Error here
+07.12.2022 [CRITICAL      15] Critical process
+07.12.2022 [DEBUG        626] Using proactor: IocpProactor
+07.12.2022 [DEBUGmain      14] Check the workflow
+07.12.2022 [INFOmain      15] This is information
+07.12.2022 [WARNINGmain      16] This is warning
+07.12.2022 [ERRORmain      17] Error here
+07.12.2022 [CRITICALmain      18] Critical process
+07.12.2022 [DEBUGproactor_events     626] Using proactor: IocpProactor
