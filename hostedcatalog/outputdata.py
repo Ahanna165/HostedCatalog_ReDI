@@ -6,19 +6,27 @@ class OutputFile(pd.DataFrame):
     """Initialize a standard file or use fromtemplate method to upload a template"""
     @staticmethod
     def fromtemplate():
-        data = str(input('Paste again TEMPLATE PATH of your \nOUTPUT file as EXCEL: ')).replace('"', '')
         while True:
+            data = str(input('\nPATH of your OUTPUT TEMPLATE as EXCEL: ')).replace('"', '')
             if data.endswith('xlsx'):
-                template = pd.read_excel(data, engine='openpyxl')
-                print('File format is .xlsx')
-                break
+                try:
+                    template = pd.read_excel(data, engine='openpyxl')
+                    print('File format is .xlsx', template.head())
+                    return template
+                except FileNotFoundError:
+                    print('FileNotFoundError! Check file name !')
+
             elif data.endswith('xls'):
-                template = pd.read_excel(data, engine='xlrd')
-                print('File format is .xls')
-                break
+                try:
+                    template = pd.read_excel(data, engine='xlrd')
+                    print('File format is .xls', template.head())
+                    return template
+                except FileNotFoundError:
+                    print('FileNotFoundError! Check file name !')
+
             else:
-                print('File format is invalid')
-        return template
+                print('File format is invalid! \nPaste the file path as .xlsx or .xls! ')
+                continue
 
     def __init__(self, template, *args, **kwargs):
         pd.DataFrame.__init__(self, template, *args, **kwargs)

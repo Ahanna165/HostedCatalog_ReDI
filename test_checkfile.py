@@ -1,4 +1,5 @@
 from hostedcatalog.checkfile import check_ext
+import doctest
 
 
 def test_check_1good_ext():
@@ -12,6 +13,4 @@ def test_check_bad_ext():
 
 
 if __name__ == "__main__":
-    test_check_bad_ext()
-    test_check_2good_ext()
-    test_check_1good_ext()
+    doctest.testmod()

@@ -1,12 +1,12 @@
 def check_ext(data):
     if data.endswith('xlsx'):
-        print('Correct extension. Continue...')
+        print('Correct extension. Uploading...')
         return True
     elif data.endswith('xls'):
-        print('Correct extension. Continue...')
+        print('Correct extension. Uploating...')
         return True
     else:
-        print('WARNING: INCORRECT extension. Continue...')
+        print('Non-excel. Continue with default...')
         return False
 
 

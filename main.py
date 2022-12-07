@@ -1,6 +1,21 @@
+import logging
 import pandas as pd
 from hostedcatalog.directory import Directory
+import doctest
 from test_checkfile import test_check_bad_ext, test_check_2good_ext, test_check_1good_ext
+doctest.testmod()
+
+
+logging.basicConfig(filename="program.log",
+                    level=logging.DEBUG,
+                    style="{",
+                    format="{asctime} [{levelname:8}{module:8}{lineno:8}] {message}",
+                    datefmt="%d.%m.%Y")
+logging.debug('Check the workflow')
+logging.info('This is information')
+logging.warning('This is warning')
+logging.error('Error here')
+logging.critical('Critical process')
 
 # create new folder for new catalog version or use current directory
 new_folder = Directory()
@@ -12,7 +27,7 @@ from hostedcatalog import inputdata, outputdata
 # use test_input.xls for testing
 while True:
     try:
-        data = str(input('Paste the PATH of your \nINPUT file as EXCEL: ')).replace('"', '')
+        data = str(input('\nPATH of your INPUT file as EXCEL: ')).replace('"', '')
         if data.endswith('xlsx'):
             df = pd.read_excel(data, engine='openpyxl')
             print('File format is .xlsx', df.head())
@@ -54,12 +69,14 @@ from hostedcatalog.checkfile import check_ext
 from hostedcatalog.outputdata import OutputFile
 
 # use template.xlsx file for testing
-data = str(input('Paste again TEMPLATE PATH of your OUTPUT file as EXCEL\nor hit enter to use default structure: ')).replace('"', '')
-if check_ext(data) == True:
+data = str(input('\nPaste TEMPLATE PATH \nas .xls or .xlsx\nor HIT ENTER to use default: '))\
+            .replace('"', '')
+if check_ext(data):
     outputfile = OutputFile.fromtemplate()
+    print('File extension is correct. Uploading...')
 else:
     outputfile = inputfile
-    print('Output File == Input File')
+    print('D.E.F.A.U.L.T!\nOutput File == Input File')
 
 print(outputfile.head())
 
@@ -74,17 +91,14 @@ else:
             try:
                 newcat[ncolumn] = newcat[str(input('Data from column: ')).upper()]
             except KeyError:
-                print('KeyError! Enter valid column name not case sensitive')
-                for ocolumn in inputfile.columns:
-                    print('For ', ncolumn, ' insert data from: ', ocolumn, '?')
-                    if str(input('y/n:')).lower != 'y':
-                        continue
-                    else:
-                        newcat[ncolumn] = inputfile[ocolumn]
-
-
-
-
+                print('\nKeyError! Enter valid column name not case sensitive')
+                #while True:
+                    #print('\nFor ', ncolumn, ' use data from InputFile: ', next(iter(inputfile.columns)), '?')
+                    #if str(input('y/n:')).lower != 'y':
+                        #print('dalshe')
+                    #else:
+                        #newcat[ncolumn] = inputfile[next(iter(inputfile.columns))]
+                        #break
 
 
     for column in newcat:
@@ -94,7 +108,7 @@ else:
     print(newcat.head())
 
 newcat[str(input('Insert name of new column: '))] = newcat.apply(lambda _: '', axis=1)  # create new empty column
-#newcat['MIME_LRG'] = outputdata.OutputFile.mime_lrg(newcat)  # create mime column and insert clean data
+# newcat['MIME_LRG'] = outputdata.OutputFile.mime_lrg(newcat)  # create mime column and insert clean data
 
 # save new catalog to newly created directory
 new_folder(newcat)

@@ -10,7 +10,7 @@ class Directory:
     and creates a folder for new catalog version"""
 
     def __init__(self):  # creates instance and name(name+month+year)
-        self.filename = "{fileprefix}_{month} {year}".format(fileprefix=str(input('Insert new catalog file prefix: ')),
+        self.filename = "{fileprefix}_{month} {year}".format(fileprefix=str(input('New catalog file prefix: ')),
                                                              year=datetime.now().strftime("%Y"),
                                                              month=str.upper(datetime.now().strftime("%b")))
         print('Instance directory created', self.filename)
@@ -18,7 +18,7 @@ class Directory:
     def set_directory(self):  # sets new directory with file name, checkes if there is directory
         print('Your current working directory is: ', os.getcwd())
         while True:
-            parent_dir = str(input('Insert your new catalog folder destination path\nor hit enter to stay in current directory: '))
+            parent_dir = str(input('\nYour new catalog folder destination path\nor hit enter to stay in current directory: '))
             self.dir_path = os.path.join(parent_dir, self.filename)
             isExist = os.path.exists(self.dir_path)
             if not isExist:
