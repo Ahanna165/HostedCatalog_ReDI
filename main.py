@@ -1,9 +1,7 @@
 import logging
 import pandas as pd
 from hostedcatalog.directory import Directory
-import doctest
 from test_checkfile import test_check_bad_ext, test_check_2good_ext, test_check_1good_ext
-doctest.testmod()
 
 
 logging.basicConfig(filename="program.log",
@@ -91,14 +89,14 @@ else:
             try:
                 newcat[ncolumn] = newcat[str(input('Data from column: ')).upper()]
             except KeyError:
-                print('\nKeyError! Enter valid column name not case sensitive')
-                #while True:
-                    #print('\nFor ', ncolumn, ' use data from InputFile: ', next(iter(inputfile.columns)), '?')
-                    #if str(input('y/n:')).lower != 'y':
-                        #print('dalshe')
-                    #else:
-                        #newcat[ncolumn] = inputfile[next(iter(inputfile.columns))]
-                        #break
+                print('\nKeyError!')
+                for ocolumn in inputfile.columns:
+                    print('\nFor ', ncolumn, ' apply ', ocolumn)
+                    if input('y/n') != 'y':
+                        continue
+                    else:
+                        newcat[ncolumn] = inputfile[ocolumn]
+                        break
 
 
     for column in newcat:
