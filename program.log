@@ -126,3 +126,9 @@ DEBUG:asyncio:Using proactor: IocpProactor
 08.12.2022 [ERROR   main          17] Error here
 08.12.2022 [CRITICALmain          18] Critical process
 08.12.2022 [DEBUG   proactor_events     626] Using proactor: IocpProactor
+08.12.2022 [DEBUG   main          14] Check the workflow
+08.12.2022 [INFO    main          15] This is information
+08.12.2022 [WARNING main          16] This is warning
+08.12.2022 [ERROR   main          17] Error here
+08.12.2022 [CRITICALmain          18] Critical process
+08.12.2022 [DEBUG   proactor_events     626] Using proactor: IocpProactor
