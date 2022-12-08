@@ -52,7 +52,7 @@ while True:
     except FileNotFoundError:
         print('FileNotFoundError!\nCheck file name before extension .xxx!')
 
-print('\nCLEANING AND MODIFYING DATA')
+print('\nCLEANING AND MODIFYING DATA...')
 time.sleep(2.4)
 # clean and manipulate data
 inputfile = inputfile[inputfile['VOLUMEPRICE'] != 0]
@@ -104,7 +104,7 @@ else:
     newcat = inputfile.join(outputfile, how='left', lsuffix='o_')
     for ncolumn in newcat:
         if ncolumn not in inputfile.columns:
-            print('\nFor column: ', ncolumn, '\nType one of following columns or X to loop over:\n', inputfile.columns)
+            print('\nFor column: ', ncolumn, '\nType one of following columns or X to loop over Input file Columns:\n', inputfile.columns)
             try:
                 newcat[ncolumn] = newcat[str(input('Data from column: ')).upper()]
             except KeyError:
