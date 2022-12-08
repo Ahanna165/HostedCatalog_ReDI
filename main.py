@@ -1,4 +1,5 @@
 import logging
+from time import sleep
 import pandas as pd
 from hostedcatalog.directory import Directory
 from test_checkfile import test_check_bad_ext, test_check_2good_ext, test_check_1good_ext
@@ -85,14 +86,14 @@ else:
     newcat = inputfile.join(outputfile, how='left', lsuffix='o_')
     for ncolumn in newcat:
         if ncolumn not in inputfile.columns:
-            print('\nFor column: ', ncolumn, '\nChoose from:\n', inputfile.columns)
+            print('\nFor column: ', ncolumn, '\nType one of following columns or X to loop over:\n', inputfile.columns)
             try:
                 newcat[ncolumn] = newcat[str(input('Data from column: ')).upper()]
             except KeyError:
                 print('\nKeyError!')
                 for ocolumn in inputfile.columns:
-                    print('\nFor ', ncolumn, ' apply ', ocolumn)
-                    if input('y/n') != 'y':
+                    print('\nFor ', ncolumn, ' apply values of ', ocolumn, '?\nPaste y or n ')
+                    if input('y/n').lower() != 'y':
                         continue
                     else:
                         newcat[ncolumn] = inputfile[ocolumn]
