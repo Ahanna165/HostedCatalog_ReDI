@@ -17,7 +17,7 @@ User input: template file or skipping to use default structure. FOR TESTING USE 
 # Getting Started
 ### Dependencies
 * Python 3.10
-* Packages used: openpyxl, tkinter,datetime
+* Packages used: openpyxl, datetime
 
 ### Install
 * $ pip install openpyxl
